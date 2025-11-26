@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santanu Soe | Academic Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #f0f8ff;
+            --secondary: #1e88e5;
+            --secondary-dark: #1565c0;
+            --accent: #e3f2fd;
+            --light: #333333;
+            --muted: #666666;
+            --border: #e1e8ed;
+            --radius: 8px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 4px 12px rgba(30, 136, 229, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+            background: var(--primary);
+            color: var(--light);
+            line-height: 1.7;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-right: 1px solid var(--border);
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            height: 100vh;
+            position: fixed;
+            z-index: 100;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-card {
+            text-align: center;
+            padding: 0 30px 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--secondary);
+            margin: 0 auto 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(30, 136, 229, 0.2);
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px;
+        }
+
+        .nav-links ul {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 8px;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            color: var(--muted);
+            text-decoration: none;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--accent);
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .nav-links i {
+            width: 24px;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 25px 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 300px;
+            height: 100vh;
+            overflow-y: auto;
+            position: relative;
+            background: var(--primary);
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 80px 50px;
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--muted);
+            margin-bottom: 40px;
+            max-width: 700px;
+            font-size: 1.1rem;
+        }
+
+        /* Home Section */
+        .home-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .home-content h1 {
+            margin-top: 10px;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            line-height: 1.1;
+            font-size: 3rem;
+        }
+        
+        .intro-text {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        /* Updated CV Section - Smaller and Nicer */
+        .cv-download {
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--secondary);
+            max-width: 400px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .cv-download:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(30, 136, 229, 0.15);
+        }
+
+        .cv-download h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .cv-download p {
+            margin-bottom: 20px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Publications Section - With Subsections */
+        .publication-categories {
+            margin-top: 40px;
+        }
+
+        .pub-category {
+            margin-bottom: 50px;
+        }
+
+        .pub-category-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            position: relative;
+        }
+
+        .pub-category-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .empty-category {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+            font-style: italic;
+            background: white;
+            border-radius: var(--radius);
+            border: 1px dashed var(--border);
+        }
+
+        .publication-list {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            counter-reset: publication-counter;
+        }
+
+        .publication-item {
+            position: relative;
+            padding: 0 0 0 50px;
+            transition: var(--transition);
+        }
+
+        .publication-item::before {
+            counter-increment: publication-counter;
+            content: counter(publication-counter) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .pub-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+            color: var(--light);
+            line-height: 1.5;
+        }
+
+        .pub-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .pub-title a:hover {
+            color: var(--secondary);
+        }
+
+        .pub-authors {
+            color: var(--muted);
+            margin-bottom: 8px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .pub-venue {
+            font-style: italic;
+            color: var(--muted);
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .pub-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .pub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 6px 0;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        .pub-link:hover {
+            border-bottom: 1px solid var(--secondary);
+        }
+
+        .pub-link i {
+            font-size: 0.85rem;
+        }
+
+        .pub-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--accent);
+            color: var(--secondary);
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* Materials Section */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .material-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(30, 136, 229, 0.15);
+        }
+
+        .material-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+        }
+
+        .material-title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .material-description {
+            color: var(--muted);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        /* Beautiful Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(30, 136, 229, 0.15);
+        }
+
+        .contact-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .contact-details p, .contact-details a {
+            color: var(--muted);
+        }
+
+        .contact-details a:hover {
+            color: var(--secondary);
+        }
+
+        /* Map Containers */
+        .map-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(30, 136, 229, 0.15);
+        }
+
+        .location-map {
+            height: 200px;
+            width: 100%;
+            border: none;
+        }
+
+        .location-info {
+            padding: 20px;
+        }
+
+        .location-info h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .location-info p {
+            color: var(--muted);
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(30, 136, 229, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design - IMPROVED FOR MOBILE */
+        @media (max-width: 1100px) {
+            .sidebar {
+                width: 260px;
+            }
+            
+            .main-content {
+                margin-left: 260px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 80px;
+                overflow: hidden;
+            }
+            
+            .sidebar:hover {
+                width: 260px;
+            }
+            
+            .profile-card, .social-links {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .sidebar:hover .profile-card,
+            .sidebar:hover .social-links {
+                opacity: 1;
+            }
+            
+            .main-content {
+                margin-left: 80px;
+            }
+            
+            .nav-links a span {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .sidebar:hover .nav-links a span {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                overflow: auto;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px 0;
+            }
+            
+            .profile-card {
+                display: none;
+            }
+            
+            .nav-links {
+                overflow-x: auto;
+                padding: 0 15px;
+            }
+            
+            .nav-links ul {
+                display: flex;
+                gap: 5px;
+            }
+            
+            .nav-links li {
+                margin-bottom: 0;
+            }
+            
+            .nav-links a {
+                padding: 12px 15px;
+                flex-direction: column;
+                text-align: center;
+                font-size: 0.9rem;
+            }
+            
+            .nav-links i {
+                margin-right: 0;
+                margin-bottom: 5px;
+                font-size: 1.3rem;
+            }
+            
+            .social-links {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                height: auto;
+                overflow: visible;
+            }
+            
+            .section {
+                min-height: auto;
+                padding: 50px 30px;
+            }
+            
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .pub-links {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .cv-download {
+                max-width: 100%;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .publication-item {
+                padding-left: 40px;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 40px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-card {
+                padding: 20px;
+            }
+        }
+
+        /* High-performance mode for low-end devices */
+        @media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <div class="sidebar">
+        <div class="profile-card">
+            <div class="profile-pic">
+                <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=1xQZCtQAAAAJ&citpid=8" alt="Santanu Soe" loading="lazy">
+            </div>
+            <!-- Name and affiliation removed as requested -->
+        </div>
+        
+        <nav class="nav-links">
+            <ul>
+                <li>
+                    <a href="#home" class="active" data-target="home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#publications" data-target="publications">
+                        <i class="fas fa-book"></i>
+                        <span>Publications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#materials" data-target="materials">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Materials</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact" data-target="contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="social-links">
+            <a href="https://scholar.google.com/citations?user=1xQZCtQAAAAJ&hl=en" title="Google Scholar" target="_blank"><i class="fab fa-google-scholar"></i></a>
+            <a href="https://www.linkedin.com/in/santanu-soe-124182242/?originalSubdomain=in" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.researchgate.net/profile/Santanu-Soe" title="ResearchGate" target="_blank"><i class="fab fa-researchgate"></i></a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="section-content">
+                <div class="home-content">
+                    <h1>Santanu Soe</h1>
+                    
+                    <div class="intro-text">
+<p>
+  I am a 
+  <a href="https://pmrf.in/" target="_blank" class="highlight">Prime Minister's Research Fellow (PMRF)</a> 
+  and 
+  <a href="https://www.iitm.ac.in/academics/joint-phd-programmes" target="_blank" class="highlight">Joint PhD scholar</a> 
+  in the <span class="highlight">Department of Mathematics</span> at 
+  <a href="https://www.iitm.ac.in/" target="_blank" class="highlight">IIT Madras</a> 
+  and the <span class="highlight">School of Mathematics and Statistics</span> at the 
+  <a href="https://www.unimelb.edu.au/" target="_blank" class="highlight">University of Melbourne</a>, 
+  working under the supervision of 
+  <a href="https://home.iitm.ac.in/vetri/home.html" target="_blank" class="highlight">V. Vetrivel</a> 
+  and 
+  <a href="https://matthewktam.com/" target="_blank" class="highlight">Matthew K. Tam</a>. 
+  I have also received the
+  <a href="https://scholarships.unimelb.edu.au/awards/melbourne-research-scholarship" target="_blank" class="highlight">
+    Melbourne Research Scholarship
+  </a> 
+  for my doctoral studies at Unimelb.
+</p>
+
+<p>
+  My research focuses on designing and analysing algorithms that are both theoretically sound and computationally efficient. 
+  I am particularly interested in 
+  <span class="highlight">operator splitting methods</span>, 
+  <span class="highlight">primal-dual algorithms</span>, and 
+  <span class="highlight">monotone inclusion problems</span>.
+</p>
+                        
+                    </div>
+                    
+                    <!-- Updated CV Section - Smaller and Nicer -->
+                    <div class="cv-download">
+                        <h3><i class="fas fa-file-download"></i> Curriculum Vitae</h3>
+                        <p>Complete academic profile, research experience, and publications</p>
+                        <a href="#" class="btn btn-primary" id="cvDownload">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section - With Subsections -->
+        <section id="publications" class="section">
+            <div class="section-content">
+                <h2 class="section-title">Publications</h2>
+                <p class="section-subtitle">Selected peer-reviewed publications and preprints.</p>
+                
+                <div class="publication-categories">
+                    <!-- Preprints Section -->
+                    <div class="pub-category">
+                        <h3 class="pub-category-title">Preprints</h3>
+                        <div class="publication-list">
+                            <div class="publication-item">
+                                <h3 class="pub-title">
+                                    <a href="https://arxiv.org/abs/2502.17918" target="_blank">The Golden Ratio Primal‑Dual Algorithm with Two New Step‑size Rules for Convex‑Concave Saddle Point Problems</a>
+                                    <span class="pub-badge">2025</span>
+                                </h3>
+                                <div class="pub-authors">Santanu Soe, Matthew K. Tam, V. Vetrivel</div>
+                                <div class="pub-venue">Preprint, arXiv:2502.17918</div>
+                                <div class="pub-links">
+                                    <a href="https://arxiv.org/abs/2502.17918" class="pub-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> arXiv
+                                    </a>
+                                    <a href="#" class="pub-link">
+                                        <i class="fas fa-book-open"></i> Journal
+                                    </a>
+                                    <a href="#" class="pub-link">
+                                        <i class="fas fa-code"></i> Code
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="publication-item">
+                                <h3 class="pub-title">
+                                    <a href="https://arxiv.org/abs/2505.06170" target="_blank">Weak Convergence of Projection Algorithm with Momentum Terms and New Step Size Rule for Quasimonotone Variational Inequalities</a>
+                                    <span class="pub-badge">2025</span>
+                                </h3>
+                                <div class="pub-authors">Santanu Soe, G. Kumar, V. Vetrivel</div>
+                                <div class="pub-venue">Preprint, arXiv:2505.06170</div>
+                                <div class="pub-links">
+                                    <a href="https://arxiv.org/abs/2505.06170" class="pub-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> arXiv
+                                    </a>
+                                    <a href="#" class="pub-link">
+                                        <i class="fas fa-book-open"></i> Journal
+                                    </a>
+                                    <a href="#" class="pub-link">
+                                        <i class="fas fa-code"></i> Code
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="publication-item">
+                                <h3 class="pub-title">
+                                    <a href="https://arxiv.org/abs/2509.02005" target="_blank">On Generalized Forward-Reflected-Backward Method for Monotone Inclusion Problems</a>
+                                    <span class="pub-badge">2025</span>
+                                </h3>
+                                <div class="pub-authors">Santanu Soe, V. Vetrivel, JC Yao</div>
+                                <div class="pub-venue">Preprint, arXiv:2509.02005</div>
+                                <div class="pub-links">
+                                    <a href="https://arxiv.org/abs/2509.02005" class="pub-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> arXiv
+                                    </a>
+                                    <a href="#" class="pub-link">
+                                        <i class="fas fa-book-open"></i> Journal
+                                    </a>
+                                    <a href="#" class="pub-link">
+                                        <i class="fas fa-code"></i> Code
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="publication-item">
+                                <h3 class="pub-title">
+                                    <a href="https://arxiv.org/abs/2510.05779" target="_blank">The Golden Ratio Proximal ADMM with Norm Independent Step-Sizes for Separable Convex Optimization</a>
+                                    <span class="pub-badge">2025</span>
+                                </h3>
+                                <div class="pub-authors">Santanu Soe, V. Vetrivel</div>
+                                <div class="pub-venue">Preprint, arXiv:2510.05779</div>
+                                <div class="pub-links">
+                                    <a href="https://arxiv.org/abs/2510.05779" class="pub-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> arXiv
+                                    </a>
+                                    <a href="#" class="pub-link">
+                                        <i class="fas fa-book-open"></i> Journal
+                                    </a>
+                                    <a href="#" class="pub-link">
+                                        <i class="fas fa-code"></i> Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Journal Publications Section -->
+                    <div class="pub-category">
+                        <h3 class="pub-category-title">Journal Publications</h3>
+                        <div class="empty-category">
+                            <i class="fas fa-file-alt" style="font-size: 2rem; margin-bottom: 15px; color: var(--muted);"></i>
+                            <p>No journal publications yet. Check back soon for updates!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materials Section -->
+        <section id="materials" class="section">
+            <div class="section-content">
+                <h2 class="section-title">Teaching Materials</h2>
+                <p class="section-subtitle">Educational resources, lecture notes, and course materials.</p>
+                
+                <div class="materials-grid">
+                    <div class="material-card">
+                        <div class="material-icon">
+                            <i class="fas fa-chalkboard"></i>
+                        </div>
+                        <h3 class="material-title">Functional Analysis</h3>
+                        <p class="material-description">Comprehensive lecture notes covering Banach spaces, Hilbert spaces, and operator theory with practical examples.</p>
+                        <div class="pub-links">
+                            <a href="#" class="btn btn-outline">
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="material-card">
+                        <div class="material-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3 class="material-title">Optimization Methods</h3>
+                        <p class="material-description">Course materials on convex optimization, gradient descent methods, and constrained optimization techniques.</p>
+                        <div class="pub-links">
+                            <a href="#" class="btn btn-outline">
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="material-card">
+                        <div class="material-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3 class="material-title">Linear Algebra</h3>
+                        <p class="material-description">Lecture slides and problem sets for advanced linear algebra with applications in data science and machine learning.</p>
+                        <div class="pub-links">
+                            <a href="#" class="btn btn-outline">
+                                <i class="fas fa-download"></i> Download ZIP
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="material-card">
+                        <div class="material-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="material-title">Probability & Statistics</h3>
+                        <p class="material-description">Complete course materials covering probability theory, statistical inference, and stochastic processes.</p>
+                        <div class="pub-links">
+                            <a href="#" class="btn btn-outline">
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beautiful Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-content">
+                <h2 class="section-title">Contact Information</h2>
+                <p class="section-subtitle">Get in touch for collaborations, research opportunities, or inquiries.</p>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email (IITM)</h4>
+                                <p><a href="mailto:ma22d002@smail.iitm.ac.in">ma22d002@smail.iitm.ac.in</a></p>
+                                <p><small>Primary academic email</small></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email (UniMelb)</h4>
+                                <p><a href="mailto:santanu.soe@student.unimelb.edu.au">santanu.soe@student.unimelb.edu.au</a></p>
+                                <p><small>University of Melbourne email</small></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Office Address (IIT Madras)</h4>
+                                <p>Department of Mathematics</p>
+                                <p>Indian Institute of Technology Madras</p>
+                                <p>Chennai, Tamil Nadu 600036</p>
+                                <p>India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Office Address (University of Melbourne)</h4>
+                                <p>School of Mathematics and Statistics</p>
+                                <p>University of Melbourne</p>
+                                <p>Parkville VIC 3010</p>
+                                <p>Australia</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map Section -->
+                    <div class="map-section">
+                        <div class="location-card">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.269637826386!2d80.2312523148226!3d13.010254990834083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52679e96f6a5a9%3A0xc5bc82a3d1171b7d!2sIndian%20Institute%20of%20Technology%20Madras!5e0!3m2!1sen!2sin!4v1647851162345!5m2!1sen!2sin" 
+                                class="location-map" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                            <div class="location-info">
+                                <h3>IIT Madras Campus</h3>
+                                <p><strong>Department of Mathematics</strong></p>
+                                <p>Indian Institute of Technology Madras</p>
+                                <p>Chennai, Tamil Nadu 600036, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-card">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.33299276593!2d144.9609233153189!3d-37.79853517975392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642cb464bffff%3A0x7dc17e0b22c85fa4!2sUniversity%20of%20Melbourne!5e0!3m2!1sen!2sau!4v1647851202345!5m2!1sen!2sau" 
+                                class="location-map" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                            <div class="location-info">
+                                <h3>University of Melbourne</h3>
+                                <p><strong>School of Mathematics and Statistics</strong></p>
+                                <p>University of Melbourne</p>
+                                <p>Parkville VIC 3010, Australia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-content">
+                <p>© 2023 Santanu Soe. All rights reserved.</p>
+                <p>Designed for academic excellence and professional presentation</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-links a').forEach(a => {
+                    a.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Get target section ID
+                const targetId = this.getAttribute('data-target');
+                
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show target section
+                document.getElementById(targetId).classList.add('active');
+                
+                // Scroll to top of the section
+                document.getElementById(targetId).scrollTop = 0;
+            });
+        });
+        
+        // CV Download
+        const cvDownload = document.getElementById('cvDownload');
+        
+        cvDownload.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('In a real implementation, this would download your CV. For now, it just shows this message.');
+        });
+    </script>
+</body>
+</html>
