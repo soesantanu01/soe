@@ -287,22 +287,29 @@
             z-index: 1;
         }
         
+        /* Make highlighted text colored, no bar/underline */
         .highlight {
             color: var(--accent);
             font-weight: 600;
-            position: relative;
+            text-decoration: none;
+        }
+        
+        /* Turn off the pseudo–underline completely */
+        .highlight::after {
+            content: none;
         }
 
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(43, 108, 176, 0.2);
-            z-index: -1;
-        }
+        .intro-text a {
+             color: var(--accent);
+             text-decoration: none;
+             font-weight: 600;
+       }
+
+      .intro-text a:hover {
+           text-decoration: underline; /* or remove this line if you want no underline even on hover */
+       }
+
+
         
         /* Enhanced CV Section */
         .cv-download {
