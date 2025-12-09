@@ -640,7 +640,7 @@
         /* Conference Gallery Section */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
@@ -648,7 +648,7 @@
         .gallery-card {
             background: var(--primary);
             border-radius: var(--radius);
-            padding: 25px 25px 20px;
+            padding: 24px 24px 18px;
             box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
@@ -670,22 +670,47 @@
             box-shadow: var(--shadow-hover);
         }
 
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
         .gallery-title {
             font-size: 1.2rem;
             color: var(--secondary);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 600;
         }
 
         .gallery-meta {
             font-size: 0.9rem;
             color: var(--muted);
-            margin-bottom: 18px;
+        }
+
+        .gallery-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(43, 108, 176, 0.08);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .gallery-badge i {
+            font-size: 0.9rem;
         }
 
         .gallery-images {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-auto-rows: 85px;
             gap: 8px;
         }
 
@@ -694,9 +719,13 @@
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
-            aspect-ratio: 4 / 3;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             background: #e2e8f0;
+        }
+
+        .gallery-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
         }
 
         .gallery-item img {
@@ -723,6 +752,20 @@
 
         .gallery-item:hover::after {
             opacity: 1;
+        }
+
+        .gallery-hint {
+            margin-top: 14px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .gallery-hint i {
+            font-size: 0.9rem;
+            color: var(--accent);
         }
 
         /* Lightbox */
@@ -781,6 +824,36 @@
 
         .lightbox-close:hover {
             background: var(--accent);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(15, 37, 71, 0.9);
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            font-size: 1.1rem;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent);
+        }
+
+        .lightbox-prev {
+            left: 10px;
+        }
+
+        .lightbox-next {
+            right: 10px;
         }
 
         /* Enhanced Contact Section */
@@ -1090,14 +1163,21 @@
 
             /* Gallery on tablets / phones */
             .gallery-grid {
-                gap: 20px;
+                grid-template-columns: 1fr;
+                gap: 24px;
                 margin-top: 25px;
             }
 
             .gallery-images {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
+                grid-auto-rows: 90px;
             }
-            
+
+            .gallery-item.featured {
+                grid-column: span 3;
+                grid-row: span 2;
+            }
+
             /* Ultra-compact section titles */
             .section-title {
                 font-size: 1.5rem;
@@ -1188,10 +1268,17 @@
 
             .gallery-images {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
+                grid-auto-rows: 80px;
             }
 
             .lightbox-inner {
                 max-width: 100%;
+            }
+
+            .lightbox-nav {
+                width: 34px;
+                height: 34px;
+                font-size: 0.95rem;
             }
         }
 
@@ -1245,6 +1332,12 @@
 
             .gallery-images {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-auto-rows: 90px;
+            }
+
+            .gallery-item.featured {
+                grid-column: span 2;
+                grid-row: span 2;
             }
         }
 
@@ -1613,19 +1706,25 @@
                 <div class="gallery-grid">
                     <!-- ICNAAO Conference Card -->
                     <div class="gallery-card">
-                        <h3 class="gallery-title">ICNAAO Conference, IIT Jodhpur</h3>
-                        <p class="gallery-meta">
-                            International Conference on Nonlinear Analysis and Optimization (ICNAAO), IIT Jodhpur.
-                        </p>
+                        <div class="gallery-header">
+                            <div>
+                                <h3 class="gallery-title">ICNAAO Conference, IIT Jodhpur</h3>
+                                <p class="gallery-meta">
+                                    International Conference on Nonlinear Analysis and Optimization (ICNAAO), IIT Jodhpur.
+                                </p>
+                            </div>
+                            <div class="gallery-badge">
+                                <i class="fas fa-camera"></i>
+                                <span>7 photos</span>
+                            </div>
+                        </div>
 
                         <!--
-                          Replace each "assets/icnaao/IMG_XXXX.jpeg" with:
-                          - the path to the image in your GitHub repository
-                          OR
-                          - a public direct-view URL from Google Drive.
+                          Images: make sure these paths match your repo:
+                          soe/assets/icnaao/IMG_1120.jpeg, ..., IMG_1198.jpeg
                         -->
                         <div class="gallery-images">
-                            <a href="assets/icnaao/IMG_1120.jpeg" class="gallery-item" data-caption="ICNAAO Conference, IIT Jodhpur – Photo 1">
+                            <a href="assets/icnaao/IMG_1120.jpeg" class="gallery-item featured" data-caption="ICNAAO Conference, IIT Jodhpur – Photo 1">
                                 <img src="assets/icnaao/IMG_1120.jpeg" alt="ICNAAO Conference, IIT Jodhpur – Photo 1" loading="lazy">
                             </a>
                             <a href="assets/icnaao/IMG_1135.jpeg" class="gallery-item" data-caption="ICNAAO Conference, IIT Jodhpur – Photo 2">
@@ -1647,9 +1746,14 @@
                                 <img src="assets/icnaao/IMG_1198.jpeg" alt="ICNAAO Conference, IIT Jodhpur – Photo 7" loading="lazy">
                             </a>
                         </div>
+
+                        <div class="gallery-hint">
+                            <i class="fas fa-mouse-pointer"></i>
+                            <span>Click any photo to view it in full size and browse the gallery.</span>
+                        </div>
                     </div>
 
-                    <!-- Duplicate .gallery-card blocks like this for other conferences -->
+                    <!-- You can duplicate the .gallery-card block above for other conferences -->
                 </div>
             </div>
         </section>
@@ -1731,6 +1835,12 @@
     <div class="lightbox-overlay" id="lightboxOverlay">
         <div class="lightbox-inner">
             <button class="lightbox-close" id="lightboxClose" aria-label="Close image">&times;</button>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
+                <i class="fas fa-chevron-right"></i>
+            </button>
             <img src="" alt="" class="lightbox-image" id="lightboxImage">
             <div class="lightbox-caption" id="lightboxCaption"></div>
         </div>
@@ -1786,12 +1896,17 @@
             });
         });
 
-        // Gallery lightbox
+        // Gallery lightbox with navigation
         const galleryItems = document.querySelectorAll('.gallery-item');
+        const galleryItemsArray = Array.from(galleryItems);
         const lightboxOverlayEl = document.getElementById('lightboxOverlay');
         const lightboxImageEl = document.getElementById('lightboxImage');
         const lightboxCaptionEl = document.getElementById('lightboxCaption');
         const lightboxCloseEl = document.getElementById('lightboxClose');
+        const lightboxPrevEl = document.getElementById('lightboxPrev');
+        const lightboxNextEl = document.getElementById('lightboxNext');
+
+        let currentIndex = -1;
 
         function openLightbox(src, caption, alt) {
             if (!lightboxOverlayEl) return;
@@ -1808,21 +1923,50 @@
             lightboxImageEl.src = '';
             lightboxCaptionEl.textContent = '';
             document.body.style.overflow = '';
+            currentIndex = -1;
         }
 
-        galleryItems.forEach(item => {
+        function showImageAt(index) {
+            if (galleryItemsArray.length === 0) return;
+            if (index < 0) index = galleryItemsArray.length - 1;
+            if (index >= galleryItemsArray.length) index = 0;
+            currentIndex = index;
+            const item = galleryItemsArray[currentIndex];
+            const src = item.getAttribute('href');
+            const caption = item.getAttribute('data-caption') || '';
+            const img = item.querySelector('img');
+            const alt = img ? img.getAttribute('alt') : '';
+            openLightbox(src, caption, alt);
+        }
+
+        galleryItemsArray.forEach((item, index) => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                const src = item.getAttribute('href');
-                const caption = item.getAttribute('data-caption') || '';
-                const img = item.querySelector('img');
-                const alt = img ? img.getAttribute('alt') : '';
-                openLightbox(src, caption, alt);
+                showImageAt(index);
             });
         });
 
         if (lightboxCloseEl) {
-            lightboxCloseEl.addEventListener('click', closeLightbox);
+            lightboxCloseEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeLightbox();
+            });
+        }
+
+        if (lightboxPrevEl) {
+            lightboxPrevEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (currentIndex === -1) return;
+                showImageAt(currentIndex - 1);
+            });
+        }
+
+        if (lightboxNextEl) {
+            lightboxNextEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (currentIndex === -1) return;
+                showImageAt(currentIndex + 1);
+            });
         }
 
         if (lightboxOverlayEl) {
@@ -1834,8 +1978,13 @@
         }
 
         document.addEventListener('keydown', (e) => {
+            if (!lightboxOverlayEl || !lightboxOverlayEl.classList.contains('active')) return;
             if (e.key === 'Escape') {
                 closeLightbox();
+            } else if (e.key === 'ArrowRight') {
+                if (currentIndex !== -1) showImageAt(currentIndex + 1);
+            } else if (e.key === 'ArrowLeft') {
+                if (currentIndex !== -1) showImageAt(currentIndex - 1);
             }
         });
     </script>
